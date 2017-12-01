@@ -1,0 +1,41 @@
+# ~/config/.tmuxinator/monitor.yml
+
+name: scheduling
+root: ~/workspace/scheduling
+
+# Runs on project start, always
+on_project_start: source .env
+
+windows:
+  - server:
+      layout: main-vertical
+      panes:
+        - bundle && bundle exec rails s
+        - rails c
+        - vi .env
+  - rscapi:
+      layout: main-vertical
+      panes:
+        - starting_rscapi:
+          - cd ../rscapi
+          - source .env
+          - make clean
+          - make
+          - ./rscapi
+        - cd ../rscapi && vi .env
+  - compliance:
+      layout: main-vertical
+      panes:
+        - starting_compliance:
+          - cd ../compliance
+          - source .env
+          - bundle && bundle exec rails s -p 5000
+        - cd ../compliance && vi .env
+  - redis-server:
+      layout: tiled
+      panes:
+        - redis-server
+  - vim:
+      layout: main-vertical
+      panes:
+        - vim

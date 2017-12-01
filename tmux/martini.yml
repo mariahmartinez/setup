@@ -1,0 +1,27 @@
+# ~/config/.tmuxinator/martini.yml
+
+name: martini
+root: ~/workspace/new-projects
+
+# Runs on project start, always
+on_project_start: source .env
+
+windows:
+  - server:
+      layout: main-vertical
+      panes:
+        - bundle && bundle exec rails s
+        - rails c
+        - vi .env
+  - webpack:
+      layout: main-vertical
+      panes:
+        - yarn install && ./bin/webpack-dev-server
+  - tests:
+      layout: main-vertical
+      panes:
+        - yarn install && yarn test
+  - vim:
+      layout: main-vertical
+      panes:
+        - vim
