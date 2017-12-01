@@ -21,6 +21,7 @@ windows:
       layout: main-vertical
       panes:
         - yarn install && yarn test
+        - vi spec/javascript
   - vim:
       layout: main-vertical
       panes:
